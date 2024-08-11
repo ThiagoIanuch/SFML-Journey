@@ -2,7 +2,7 @@
 
 This is my journey to learn SFML and game programming, where I will create several projects.
 
-<img src="https://i.imgur.com/d1EUzu7.gif">
+<img src="https://i.imgur.com/lmbFe3r.gif">
 
 ## Built with
 
