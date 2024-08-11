@@ -16,19 +16,41 @@ sf::RectangleShape createSquare() {
     return square;
 }
 
+bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
+    if (square.getGlobalBounds().intersects(triangle.getGlobalBounds()) || square.getGlobalBounds().intersects(circle.getGlobalBounds())) {
+        std::cout << "Object collision: true" << std::endl;
+
+        return true;
+    }
+
+    std::cout << "Object collision: false" << std::endl;
+
+    return false;
+}
+
 // Movimentar o quadrado
-void handleMovement(sf::RectangleShape &squarePos) {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && squarePos.getPosition().y > 0) {
-        squarePos.move(sf::Vector2f(0.0, -0.25));
+void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
+    sf::Vector2f movement(0.0f, 0.0f);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y > 0) {
+        movement = sf::Vector2f(0.0f, -0.25f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && squarePos.getPosition().y + squarePos.getGlobalBounds().height < WINDOW_HEIGHT) {
-        squarePos.move(sf::Vector2f(0.0, 0.25));
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && square.getPosition().y + square.getGlobalBounds().height < WINDOW_HEIGHT) {
+        movement = sf::Vector2f(0.0f, 0.25f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && squarePos.getPosition().x > 0) {
-        squarePos.move(sf::Vector2f(-0.25, 0.0));
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && square.getPosition().x > 0) {
+        movement = sf::Vector2f(-0.25f, 0.0f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && squarePos.getPosition().x + squarePos.getGlobalBounds().width < WINDOW_WIDTH) {
-        squarePos.move(sf::Vector2f(0.25, 0.0));
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && square.getPosition().x + square.getGlobalBounds().width < WINDOW_WIDTH) {
+        movement = sf::Vector2f(0.25f, 0.0f);
+    }
+
+    sf::Vector2f originalPos = square.getPosition();
+
+    square.move(movement);
+
+    if (detectCollision(square, triangle, circle)) {
+        square.setPosition(originalPos);
     }
 }
 
@@ -76,11 +98,10 @@ int main()
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-                //
             }
         }
 
-        handleMovement(square);
+        handleMovement(square, triangle, circle);
 
         window.clear();
         window.draw(square);
