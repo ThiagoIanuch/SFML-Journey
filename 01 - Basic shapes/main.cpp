@@ -13,12 +13,15 @@ sf::RectangleShape createSquare() {
 
     square.setFillColor(sf::Color::Cyan);
 
+    square.setPosition(50, 50);
+
     return square;
 }
 
+// Detectar colisões
 bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
     if (square.getGlobalBounds().intersects(triangle.getGlobalBounds()) || square.getGlobalBounds().intersects(circle.getGlobalBounds())) {
-        std::cout << "Object collision: true" << std::endl;
+        std::cout << "Object collision: true";
 
         return true;
     }
@@ -30,7 +33,10 @@ bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::C
 
 // Movimentar o quadrado
 void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
+    square.setOrigin(50.f, 50.f);
+
     sf::Vector2f movement(0.0f, 0.0f);
+    float rotation = 0.0f;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y > 0) {
         movement = sf::Vector2f(0.0f, -0.25f);
@@ -45,12 +51,22 @@ void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::Ci
         movement = sf::Vector2f(0.25f, 0.0f);
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+        rotation = 0.05f;
+    }
+
+    // Obter a posição e rotação original
     sf::Vector2f originalPos = square.getPosition();
+    float originalRotation = square.getRotation();
 
+    // Realizar o movimento ou a rotação
     square.move(movement);
+    square.rotate(rotation);
 
+    // Detectar colisões
     if (detectCollision(square, triangle, circle)) {
         square.setPosition(originalPos);
+        square.setRotation(originalRotation);
     }
 }
 
@@ -86,12 +102,15 @@ int main()
 {   
     // Criar a tela
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "01 - Basic shapes");
+    sf::Clock clock;
 
     // Chamar as formas geométricas
     sf::RectangleShape square = createSquare();
     sf::ConvexShape triangle = createTriangle();
     sf::CircleShape circle = createCircle();
 
+
+    sf::Clock debugClock;
     // Realizar os eventos na tela
     while (window.isOpen()) {
         sf::Event event;
@@ -100,6 +119,12 @@ int main()
                 window.close();
             }
         }
+        float currentTime = clock.restart().asSeconds();
+        float fps = 1.0f / (currentTime);
+
+        
+        std::cout << "FPS: " << fps << " ";
+
 
         handleMovement(square, triangle, circle);
 
