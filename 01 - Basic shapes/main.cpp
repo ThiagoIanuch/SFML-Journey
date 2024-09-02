@@ -38,16 +38,16 @@ void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::Ci
     sf::Vector2f movement(0.0f, 0.0f);
     float rotation = 0.0f;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y > 0) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y - 50     > 0) {
         movement = sf::Vector2f(0.0f, -0.25f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && square.getPosition().y + square.getGlobalBounds().height < WINDOW_HEIGHT) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && square.getPosition().y + square.getGlobalBounds().height < WINDOW_HEIGHT + 50) {
         movement = sf::Vector2f(0.0f, 0.25f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && square.getPosition().x > 0) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && square.getPosition().x - 50 > 0) {
         movement = sf::Vector2f(-0.25f, 0.0f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && square.getPosition().x + square.getGlobalBounds().width < WINDOW_WIDTH) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && square.getPosition().x + square.getGlobalBounds().width < WINDOW_WIDTH + 50) {
         movement = sf::Vector2f(0.25f, 0.0f);
     }
 
