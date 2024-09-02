@@ -21,7 +21,7 @@ sf::RectangleShape createSquare() {
 // Detectar colisões
 bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
     if (square.getGlobalBounds().intersects(triangle.getGlobalBounds()) || square.getGlobalBounds().intersects(circle.getGlobalBounds())) {
-        std::cout << "Object collision: true";
+        std::cout << "Object collision: true" << std::endl;
 
         return true;
     }
