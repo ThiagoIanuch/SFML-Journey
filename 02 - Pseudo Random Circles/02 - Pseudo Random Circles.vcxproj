@@ -24,6 +24,7 @@
     <ProjectGuid>{e5f511f2-a94f-44bc-9dd0-c18f11c61eeb}</ProjectGuid>
     <RootNamespace>My02RandomCircles</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>02 - Pseudo Random Circles</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

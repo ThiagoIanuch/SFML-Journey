@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 - Random Circles", "02 - Random Circles\02 - Random Circles.vcxproj", "{E5F511F2-A94F-44BC-9DD0-C18F11C61EEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 - Pseudo Random Circles", "02 - Pseudo Random Circles\02 - Pseudo Random Circles.vcxproj", "{E5F511F2-A94F-44BC-9DD0-C18F11C61EEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
