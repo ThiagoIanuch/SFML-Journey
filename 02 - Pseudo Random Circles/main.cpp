@@ -4,11 +4,13 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "02 - Pseudo Random Circles");
 
-	sf::CircleShape circle[50];
+	srand(time(NULL));
+	sf::CircleShape circle[250];
 
-	for (int i = 0; i < 50; i++) {
-		circle[i].setRadius(rand());
-		circle[i].setPosition(500, 500);
+	for (int i = 0; i < 250; i++) {
+		circle[i].setRadius(rand() % 100);
+		circle[i].setPosition(rand() % 1000, rand() % 1000);
+		circle[i].setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
 		std::cout << i << " " << circle[i].getRadius() << std::endl;
 	}
 
@@ -20,8 +22,8 @@ int main() {
 			}
 		}
 
-		for (int i = 0; i < 50; i++) {
-			window.draw(circle[0]);
+		for (int i = 0; i < 250; i++) {
+			window.draw(circle[i]);
 		}
 
 		window.display();
