@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-// Váriaveis com informações da tela
+// Window properties
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
-// Criar o quadrado
+// Set square properties
 sf::RectangleShape createSquare() 
 {
     sf::RectangleShape square;
@@ -19,7 +19,7 @@ sf::RectangleShape createSquare()
     return square;
 }
 
-// Detectar colisões
+// Detect square collisions with circle or triangle
 bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) 
 {
     if (square.getGlobalBounds().intersects(triangle.getGlobalBounds()) || square.getGlobalBounds().intersects(circle.getGlobalBounds()))
@@ -34,7 +34,7 @@ bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::C
     return false;
 }
 
-// Movimentar o quadrado
+// Move the square
 void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) 
 {
     square.setOrigin(50.f, 50.f);
@@ -64,15 +64,12 @@ void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::Ci
         rotation = 0.05f;
     }
 
-    // Obter a posição e rotação original
     sf::Vector2f originalPos = square.getPosition();
     float originalRotation = square.getRotation();
 
-    // Realizar o movimento ou a rotação
     square.move(movement);
     square.rotate(rotation);
 
-    // Detectar colisões
     if (detectCollision(square, triangle, circle)) 
     {
         square.setPosition(originalPos);
@@ -80,7 +77,7 @@ void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::Ci
     }
 }
 
-// Criar o triângulo
+// Set triangle properties
 sf::ConvexShape createTriangle() 
 {
     sf::ConvexShape triangle;
@@ -96,7 +93,7 @@ sf::ConvexShape createTriangle()
     return triangle;
 }
 
-// Criar o círculo
+// Set circle properties
 sf::CircleShape createCircle() 
 {
     sf::CircleShape circle;
@@ -112,18 +109,14 @@ sf::CircleShape createCircle()
 
 int main()
 {   
-    // Criar a tela
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "01 - Basic shapes");
 
-    // Chamar as formas geométricas
     sf::RectangleShape square = createSquare();
     sf::ConvexShape triangle = createTriangle();
     sf::CircleShape circle = createCircle();
 
-    // Relógio para calcular o FPS
     sf::Clock clock;
 
-    // Realizar os eventos na tela
     while (window.isOpen()) 
     {
         sf::Event event;
@@ -135,15 +128,12 @@ int main()
             }
         }
 
-        // Mostrar o FPS
         sf::Time time = clock.getElapsedTime();
         std::cout << "FPS: " << static_cast < int>(1.0f / time.asSeconds()) << "    ";
         clock.restart();
 
-        // Lidar com o movimento do quadrado
         handleMovement(square, triangle, circle);
 
-        // Desenhar na tela
         window.clear();
         window.draw(square);
         window.draw(triangle);
