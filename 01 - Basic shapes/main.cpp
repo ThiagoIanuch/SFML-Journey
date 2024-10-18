@@ -38,7 +38,7 @@ void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::Ci
     sf::Vector2f movement(0.0f, 0.0f);
     float rotation = 0.0f;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y - 50     > 0) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y - 50 > 0) {
         movement = sf::Vector2f(0.0f, -0.25f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && square.getPosition().y + square.getGlobalBounds().height < WINDOW_HEIGHT + 50) {
@@ -102,15 +102,15 @@ int main()
 {   
     // Criar a tela
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "01 - Basic shapes");
-    sf::Clock clock;
 
     // Chamar as formas geométricas
     sf::RectangleShape square = createSquare();
     sf::ConvexShape triangle = createTriangle();
     sf::CircleShape circle = createCircle();
 
+    // Relógio para calcular o FPS
+    sf::Clock clock;
 
-    sf::Clock debugClock;
     // Realizar os eventos na tela
     while (window.isOpen()) {
         sf::Event event;
@@ -119,15 +119,16 @@ int main()
                 window.close();
             }
         }
-        float currentTime = clock.restart().asSeconds();
-        float fps = 1.0f / (currentTime);
 
-        
-        std::cout << "FPS: " << fps << " ";
+        // Mostrar o FPS
+        sf::Time time = clock.getElapsedTime();
+        std::cout << "FPS: " << static_cast < int>(1.0f / time.asSeconds()) << "    ";
+        clock.restart();
 
-
+        // Lidar com o movimento do quadrado
         handleMovement(square, triangle, circle);
 
+        // Desenhar na tela
         window.clear();
         window.draw(square);
         window.draw(triangle);
