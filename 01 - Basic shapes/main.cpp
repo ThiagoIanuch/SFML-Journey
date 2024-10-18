@@ -6,7 +6,8 @@ const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
 // Criar o quadrado
-sf::RectangleShape createSquare() {
+sf::RectangleShape createSquare() 
+{
     sf::RectangleShape square;
 
     square.setSize(sf::Vector2f(100, 100));
@@ -19,8 +20,10 @@ sf::RectangleShape createSquare() {
 }
 
 // Detectar colisões
-bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
-    if (square.getGlobalBounds().intersects(triangle.getGlobalBounds()) || square.getGlobalBounds().intersects(circle.getGlobalBounds())) {
+bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) 
+{
+    if (square.getGlobalBounds().intersects(triangle.getGlobalBounds()) || square.getGlobalBounds().intersects(circle.getGlobalBounds()))
+    {
         std::cout << "Object collision: true" << std::endl;
 
         return true;
@@ -32,26 +35,32 @@ bool detectCollision(sf::RectangleShape &square, sf::ConvexShape triangle, sf::C
 }
 
 // Movimentar o quadrado
-void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) {
+void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::CircleShape circle) 
+{
     square.setOrigin(50.f, 50.f);
 
     sf::Vector2f movement(0.0f, 0.0f);
     float rotation = 0.0f;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y - 50 > 0) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && square.getPosition().y - 50 > 0)
+    {
         movement = sf::Vector2f(0.0f, -0.25f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && square.getPosition().y + square.getGlobalBounds().height < WINDOW_HEIGHT + 50) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && square.getPosition().y + square.getGlobalBounds().height < WINDOW_HEIGHT + 50)
+    {
         movement = sf::Vector2f(0.0f, 0.25f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && square.getPosition().x - 50 > 0) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && square.getPosition().x - 50 > 0)
+    {
         movement = sf::Vector2f(-0.25f, 0.0f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && square.getPosition().x + square.getGlobalBounds().width < WINDOW_WIDTH + 50) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && square.getPosition().x + square.getGlobalBounds().width < WINDOW_WIDTH + 50)
+    {
         movement = sf::Vector2f(0.25f, 0.0f);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) 
+    {
         rotation = 0.05f;
     }
 
@@ -64,14 +73,16 @@ void handleMovement(sf::RectangleShape &square, sf::ConvexShape triangle, sf::Ci
     square.rotate(rotation);
 
     // Detectar colisões
-    if (detectCollision(square, triangle, circle)) {
+    if (detectCollision(square, triangle, circle)) 
+    {
         square.setPosition(originalPos);
         square.setRotation(originalRotation);
     }
 }
 
 // Criar o triângulo
-sf::ConvexShape createTriangle() {
+sf::ConvexShape createTriangle() 
+{
     sf::ConvexShape triangle;
 
     triangle.setPointCount(3);
@@ -86,7 +97,8 @@ sf::ConvexShape createTriangle() {
 }
 
 // Criar o círculo
-sf::CircleShape createCircle() {
+sf::CircleShape createCircle() 
+{
     sf::CircleShape circle;
 
     circle.setRadius(50);
@@ -112,10 +124,13 @@ int main()
     sf::Clock clock;
 
     // Realizar os eventos na tela
-    while (window.isOpen()) {
+    while (window.isOpen()) 
+    {
         sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+        while (window.pollEvent(event)) 
+        {
+            if (event.type == sf::Event::Closed) 
+            {
                 window.close();
             }
         }
