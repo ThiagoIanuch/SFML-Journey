@@ -2,7 +2,7 @@
 
 This is my journey to learn SFML and game programming, where I will create several projects.
 
-[SFML Journey.webm](https://github.com/user-attachments/assets/d92f8c2c-4588-4546-8e58-684609c835d9)
+https://github.com/user-attachments/assets/5ae0a5e5-bc09-4160-a1b7-fac5b53c5df4
 
 The projects are inspired by this <a href="https://www.youtube.com/watch?v=kbVn7Jdhl3Y">**Kebab video**</a>.
 
