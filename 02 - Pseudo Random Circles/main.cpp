@@ -1,19 +1,59 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+// Window properties
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
+
+// Generation properties
+const float CIRCLES_PER_SECOND = 0.001f;
+
+// Circle properties
+const int MIN_RADIUS = 20;
+const int MAX_RADIUS = 30;
+
+const int MIN_R_COLOR = 0;
+const int MAX_R_COLOR = 255;
+
+const int MIN_G_COLOR = 0;
+const int MAX_G_COLOR = 255;
+
+const int MIN_B_COLOR = 0;
+const int MAX_B_COLOR = 255;
+
+// Set circles properties
+void generateCircles(sf::CircleShape circleShape, std::vector<sf::CircleShape> &circles)
+{				
+	circles.push_back(circleShape);
+
+	circles.back().setRadius(rand() % (MAX_RADIUS - MIN_RADIUS) + MIN_RADIUS);
+	circles.back().setPosition(rand() % WINDOW_WIDTH, rand() % WINDOW_HEIGHT);
+	circles.back().setFillColor(sf::Color(rand() % (MAX_R_COLOR - MIN_R_COLOR) + MIN_R_COLOR, rand() % (MAX_G_COLOR - MIN_G_COLOR) + MIN_G_COLOR, rand() % (MAX_B_COLOR - MIN_B_COLOR) + MAX_B_COLOR));
+
+	std::cout << "Circle " << circles.size() << "  -  Radius: " << circles.back().getRadius() << "     Pos (X, Y): " << circles.back().getPosition().x << ", " << circles.back().getPosition().y << std::endl;
+}
+
+// Draw circles in screen
+void drawCircles(sf::RenderWindow &window, std::vector<sf::CircleShape> circles)
+{
+	for (auto c : circles) 
+	{
+		window.draw(c);
+	}
+}
+
 int main() 
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "02 - Pseudo Random Circles");
-
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "02 - Pseudo Random Circles");
+	
 	sf::CircleShape circleShape;
 	std::vector<sf::CircleShape> circles;
 	sf::Clock clock;
 
-	srand(time(NULL)); // Semente para gerar os circulos de forma pseudo aleatória
+	srand(time(NULL)); // Seed pseudo random numbers
 
 	while (window.isOpen()) 
 	{
-		// Fechar a janela
 		sf::Event event;
 		while (window.pollEvent(event)) 
 		{
@@ -22,30 +62,17 @@ int main()
 				window.close();
 			}
 		}
-				
-		// Gerar os círculos
-		if(clock.getElapsedTime().asMicroseconds() > 5) 
+
+		if(clock.getElapsedTime().asSeconds() > CIRCLES_PER_SECOND) 
 		{
-			circles.push_back(circleShape);
-
-			circles.back().setRadius(rand() % 25 + 15);
-			circles.back().setPosition(rand() % 800, rand() % 600);
-			circles.back().setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
-
-			std::cout << "Circle " << circles.size() << ": Radius " << circles.back().getRadius() << "     Pos (X, Y) " << circles.back().getPosition().x << ", " << circles.back().getPosition().y << std::endl;
-
+			generateCircles(circleShape, circles);
 			clock.restart();
 		}
 
-		// Limpar
 		window.clear();
 
-		// Desenhar os círculos na tela
-		for (sf::CircleShape c : circles) 
-		{
-			window.draw(c);
-		}
-
+		drawCircles(window, circles);
+			
 		window.display();
 	}
 
