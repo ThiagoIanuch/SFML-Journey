@@ -6,7 +6,7 @@ const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
 // Generation properties
-const float CIRCLES_PER_SECOND = 0.001f;
+const float CIRCLE_GENERATION_INTERVAL = 0.001f;
 
 // Circle properties
 const int MIN_RADIUS = 20;
@@ -63,7 +63,7 @@ int main()
 			}
 		}
 
-		if(clock.getElapsedTime().asSeconds() > CIRCLES_PER_SECOND) 
+		if(clock.getElapsedTime().asSeconds() > CIRCLE_GENERATION_INTERVAL)
 		{
 			generateCircles(circleShape, circles);
 			clock.restart();
