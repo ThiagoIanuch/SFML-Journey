@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 - Pseudo random circles", "02 - Pseudo random circles\02 - Pseudo random circles.vcxproj", "{E5F511F2-A94F-44BC-9DD0-C18F11C61EEB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03 - Pseudo random circle collisions", "03 - Pseudo random circle collisions\03 - Pseudo random circle collisions.vcxproj", "{0D045216-31A4-4A5A-B656-9DAF09FA61CF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03 - Elastic collisions", "03 - Elastic collisions\03 - Elastic collisions.vcxproj", "{0D045216-31A4-4A5A-B656-9DAF09FA61CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

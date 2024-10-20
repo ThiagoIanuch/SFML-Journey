@@ -24,7 +24,7 @@
     <ProjectGuid>{0d045216-31a4-4a5a-b656-9daf09fa61cf}</ProjectGuid>
     <RootNamespace>Pseudorandomcirclecollisions</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>03 - Pseudo random circle collisions</ProjectName>
+    <ProjectName>03 - Elastic collisions</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
