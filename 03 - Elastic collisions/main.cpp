@@ -24,7 +24,7 @@ int main()
     for (int i = 0; i < NUMBER_OF_CIRCLES; i++)
     {
         movement[i] = sf::Vector2f(5, 5);
-        circles[i].setRadius(rand() % 20 - 10 + 10);
+        circles[i].setRadius(rand() % 6 + 15);
         circles[i].setPosition(rand() % 800, rand() % 600);
         circles[i].setFillColor(sf::Color::Blue);
     }
@@ -53,8 +53,6 @@ int main()
                 movement[i].y = -movement[i].y;
             }
         }
-
-        std::cout << circles[5].getPosition().x << std::endl;
 
         for (auto c : circles)
         {
