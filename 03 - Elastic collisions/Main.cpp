@@ -9,8 +9,8 @@ const int FRAMERATE_LIMIT = 60;
 // Circles properties
 const int NUMBER_OF_CIRCLES = 30;
 
-void generateCircles();
-void drawCircles();
+void generateCircles(sf::RenderWindow& window);
+void drawCircles(sf::RenderWindow& window, std::vector<sf::CircleShape> circles);
 
 int main()
 {
@@ -30,7 +30,7 @@ int main()
 
         generateCircles(window);
 
-        window.clear();
+        //window.clear();
 
         window.display();
     }
@@ -44,7 +44,8 @@ void generateCircles(sf::RenderWindow &window) {
 
     for (int i = 0; i < NUMBER_OF_CIRCLES; i++)
     {
-        sf::CircleShape circle;  
+        sf::CircleShape circle;
+
         circle.setRadius(rand() % 6 + 15); 
         circle.setPosition(rand() % 800, rand() % 600); 
         circle.setFillColor(sf::Color::Blue);
@@ -52,11 +53,11 @@ void generateCircles(sf::RenderWindow &window) {
         circles.push_back(circle);
     }
 
-    drawCircles(circles, window);
+    drawCircles(window, circles);
 }
 
-void drawCircles(std::vector<sf::CircleShape> &circles, sf::RenderWindow &window) {
-    for (auto& c : circles)
+void drawCircles(sf::RenderWindow& window, std::vector<sf::CircleShape> circles) {
+    for (auto c : circles)
     {
         window.draw(c);
     }
