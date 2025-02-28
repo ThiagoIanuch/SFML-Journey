@@ -10,13 +10,13 @@ const int FRAMERATE_LIMIT = 60;
 const int NUMBER_OF_CIRCLES = 30;
 
 void generateCircles();
+void drawCircles();
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "03 - Pseudo random circle collisions");
 
-    sf::Vector2f movement[50];
-
+    window.setFramerateLimit(FRAMERATE_LIMIT);
 
     while (window.isOpen())
     {
@@ -28,6 +28,8 @@ int main()
             }
         }
 
+        generateCircles(window);
+
         window.clear();
 
         window.display();
@@ -35,29 +37,34 @@ int main()
     return 0;
 }
 
-void generateCircles() {
-    sf::CircleShape circles[NUMBER_OF_CIRCLES];
-
-    window.setFramerateLimit(FRAMERATE_LIMIT);
+void generateCircles(sf::RenderWindow &window) {
+    std::vector<sf::CircleShape> circles;
 
     srand(time(NULL));
 
     for (int i = 0; i < NUMBER_OF_CIRCLES; i++)
     {
-        movement[i] = sf::Vector2f(5, 5);
-        circles[i].setRadius(rand() % 6 + 15);
-        circles[i].setPosition(rand() % 800, rand() % 600);
-        circles[i].setFillColor(sf::Color::Blue);
+        sf::CircleShape circle;  
+        circle.setRadius(rand() % 6 + 15); 
+        circle.setPosition(rand() % 800, rand() % 600); 
+        circle.setFillColor(sf::Color::Blue);
+
+        circles.push_back(circle);
     }
+
+    drawCircles(circles, window);
 }
 
-void drawCircles() {
-    for (auto c : circles)
+void drawCircles(std::vector<sf::CircleShape> &circles, sf::RenderWindow &window) {
+    for (auto& c : circles)
     {
         window.draw(c);
     }
 }
 
+/*
+        //movement[i] = sf::Vector2f(5, 5);
+    // sf::Vector2f movement[50];
 void detectCollision() {
 
     for (int i = 0; i < NUMBER_OF_CIRCLES; i++)
@@ -73,3 +80,4 @@ void detectCollision() {
         }
     }
 }
+*/
